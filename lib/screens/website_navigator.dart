@@ -127,7 +127,7 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
       context: context,
       builder: (context) {
         return Container(
-          color: Colors.white,
+          color: bgColor,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: _buildMenuItems(isDesktop: false).map((item) {
