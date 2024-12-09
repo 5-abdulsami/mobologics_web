@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:mobologics_web/screens/careers_screen.dart';
-import 'package:mobologics_web/screens/contact_us_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/screens/home_screen.dart';
 import 'package:mobologics_web/screens/services_screen.dart';
 import 'package:mobologics_web/screens/team_screen.dart';
+import 'package:mobologics_web/screens/careers_screen.dart';
+import 'package:mobologics_web/screens/contact_us_screen.dart';
+import 'package:mobologics_web/utils/colors.dart';
 
 class WebsiteNavigator extends StatefulWidget {
-  const WebsiteNavigator({super.key});
+  final int initialIndex;
+
+  const WebsiteNavigator({super.key, required this.initialIndex});
 
   @override
   State<WebsiteNavigator> createState() => _WebsiteNavigatorState();
 }
 
 class _WebsiteNavigatorState extends State<WebsiteNavigator> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
-  // List of pages for navigation
+  final List<String> _routes = [
+    '/',
+    '/services',
+    '/team',
+    '/careers',
+    '/contact',
+  ];
+
   final List<Widget> _pages = const [
     HomeScreen(),
     ServicesScreen(),
@@ -24,10 +36,19 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
     ContactUsScreen(),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
+
   void _onMenuTap(int index) {
     setState(() {
       _selectedIndex = index;
     });
+    final newRoute = _routes[index];
+    GoRouter.of(context)
+        .go(newRoute); // Updates the URL without pushing a new route.
   }
 
   @override
@@ -35,18 +56,21 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    bool isDesktop = width > 800; // Define breakpoint for responsiveness
+    bool isDesktop = width > 800;
 
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: isDesktop ? height * 0.12 : height * 0.1,
-        backgroundColor: Colors.white,
+        backgroundColor: bgColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              "assets/images/mobologics_logo.jpg",
-              height: isDesktop ? height * 0.12 : height * 0.1,
+            Container(
+              padding: EdgeInsets.only(left: 40),
+              child: Image.asset(
+                "assets/images/mobologics_name.png",
+                height: isDesktop ? height * 0.06 : height * 0.04,
+              ),
             ),
             if (isDesktop)
               Row(
@@ -55,7 +79,10 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
               )
             else
               IconButton(
-                icon: const Icon(Icons.menu),
+                icon: const Icon(
+                  Icons.menu,
+                  color: whiteColor,
+                ),
                 onPressed: () {
                   _showMobileMenu(context);
                 },
@@ -63,7 +90,7 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
           ],
         ),
       ),
-      body: _pages[_selectedIndex], // Switches content dynamically
+      body: _pages[_selectedIndex], // Dynamically updates the body.
     );
   }
 
@@ -84,9 +111,9 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
         padding: EdgeInsets.symmetric(horizontal: isDesktop ? 16.0 : 8.0),
         child: Text(
           title,
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             fontSize: isDesktop ? 16 : 14,
-            color: _selectedIndex == index ? Colors.blue : Colors.black,
+            color: _selectedIndex == index ? redColor : Colors.white,
             fontWeight:
                 _selectedIndex == index ? FontWeight.bold : FontWeight.normal,
           ),

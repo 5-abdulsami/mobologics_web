@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobologics_web/screens/careers_screen.dart';
+import 'package:mobologics_web/screens/contact_us_screen.dart';
+import 'package:mobologics_web/screens/services_screen.dart';
+import 'package:mobologics_web/screens/team_screen.dart';
 import 'package:mobologics_web/screens/website_navigator.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -23,14 +28,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Mobologics',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const WebsiteNavigator(),
+      routerConfig: GoRouter(
+        routes: [
+          GoRoute(
+            path: '/',
+            builder: (context, state) =>
+                const WebsiteNavigator(initialIndex: 0),
+          ),
+          GoRoute(
+            path: '/services',
+            builder: (context, state) =>
+                const WebsiteNavigator(initialIndex: 1),
+          ),
+          GoRoute(
+            path: '/team',
+            builder: (context, state) =>
+                const WebsiteNavigator(initialIndex: 2),
+          ),
+          GoRoute(
+            path: '/careers',
+            builder: (context, state) =>
+                const WebsiteNavigator(initialIndex: 3),
+          ),
+          GoRoute(
+            path: '/contact',
+            builder: (context, state) =>
+                const WebsiteNavigator(initialIndex: 4),
+          ),
+        ],
+      ),
     );
   }
 }

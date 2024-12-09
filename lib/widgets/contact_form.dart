@@ -124,6 +124,9 @@ class ContactForm extends StatelessWidget {
                 height: height * 0.04,
               ),
               CustomButton(
+                color: blueColor,
+                width: double.infinity,
+                height: height * 0.07,
                 text: "Send Message",
                 onTap: () => _submitForm(),
               ),
