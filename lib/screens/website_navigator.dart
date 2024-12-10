@@ -66,7 +66,7 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: EdgeInsets.only(left: 40),
+              padding: EdgeInsets.only(left: width * 0.04),
               child: Image.asset(
                 "assets/images/mobologics_name.png",
                 height: isDesktop ? height * 0.06 : height * 0.04,
@@ -108,7 +108,7 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
     return InkWell(
       onTap: () => _onMenuTap(index),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: isDesktop ? 16.0 : 8.0),
+        padding: EdgeInsets.symmetric(horizontal: isDesktop ? 20 : 8.0),
         child: Text(
           title,
           style: GoogleFonts.poppins(

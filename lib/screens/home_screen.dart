@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/utils/colors.dart';
 import 'package:mobologics_web/widgets/custom_button.dart';
+import 'package:mobologics_web/widgets/home_description_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,12 +17,12 @@ class HomeScreen extends StatelessWidget {
         if (constraints.maxWidth > 800) {
           // For desktop view (width > 800)
           return SingleChildScrollView(
+            // Main Page Column
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Hero section with the title and description
-                Container(
-                  decoration: BoxDecoration(color: bgColor),
+                SizedBox(
                   height: height,
                   child: Row(
                     children: [
@@ -29,52 +30,50 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: EdgeInsets.only(left: width * 0.05),
+                          padding: EdgeInsets.only(
+                              left: width * 0.05,
+                              top: height * 0.14), // Reduced top padding
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment:
+                                MainAxisAlignment.start, // Align to the top
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               RichText(
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                    text: "WE CREATE AND MARKET\n",
-                                    style: GoogleFonts.poppins(
-                                      color: whiteColor,
-                                      fontSize: 70,
-                                      fontWeight: FontWeight.bold,
-                                      height: 1,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "WE CREATE AND MARKET\n",
+                                      style: GoogleFonts.poppins(
+                                        color: whiteColor,
+                                        fontSize: 70,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1,
+                                      ),
                                     ),
-                                  ),
-                                  TextSpan(
-                                    text: "MOBILE APPS",
-                                    style: GoogleFonts.poppins(
-                                      color: redColor,
-                                      fontSize: 70,
-                                      fontWeight: FontWeight.bold,
-                                      height: 1,
+                                    TextSpan(
+                                      text: "MOBILE APPS",
+                                      style: GoogleFonts.poppins(
+                                        color: redColor,
+                                        fontSize: 70,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1,
+                                      ),
                                     ),
-                                  ),
-                                ]),
-                              ),
-                              SizedBox(height: height * 0.02),
-                              Text(
-                                "We are a dynamic technology company offering comprehensive solutions in mobile app development, web app development, graphic design, and digital marketing. Our expert team leverages cutting-edge tools and strategies to deliver high-quality, user-centric products that drive business growth and enhance brand presence in the digital landscape.",
-                                style: GoogleFonts.poppins(
-                                  color: whiteColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w300,
+                                  ],
                                 ),
-                                textAlign: TextAlign.justify,
                               ),
-                              SizedBox(height: height * 0.04),
+                              SizedBox(height: height * 0.01), // Reduced space
+                              HomeDescriptionText(),
+                              SizedBox(height: height * 0.025), // Reduced space
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: CustomButton(
                                   text: "Get a Quote",
                                   onTap: () {},
                                   height: height * 0.06,
-                                  width: width * 0.15,
+                                  width: width * 0.141,
                                   color: redColor,
+                                  icon: Icons.arrow_forward,
                                 ),
                               ),
                             ],
@@ -85,7 +84,9 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: EdgeInsets.only(left: width * 0.05),
+                          padding: EdgeInsets.only(
+                              left: width * 0.05,
+                              top: height * 0.001), // Reduced top padding
                           child: Center(
                             child: Image.asset(
                               "assets/images/screen.png",
@@ -98,28 +99,74 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+
                 // About Us section
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "ABOUT US",
-                    style: TextStyle(
-                      fontSize: 60,
-                      color: redColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                SizedBox(
+                  height: height,
+                  child: Row(
+                    children: [
+                      // Left section with the text and button
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: width * 0.05,
+                              top: height * 0.14), // Reduced top padding
+                          child: Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment.start, // Align to the top
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "ABOUT ",
+                                      style: GoogleFonts.poppins(
+                                        color: whiteColor,
+                                        fontSize: 70,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: "US",
+                                      style: GoogleFonts.poppins(
+                                        color: redColor,
+                                        fontSize: 70,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: height * 0.01), // Reduced space
+                              HomeDescriptionText(),
+                              SizedBox(height: height * 0.025), // Reduced space
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Right section with the image
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: width * 0.05,
+                              top: height * 0.001), // Reduced top padding
+                          child: Center(
+                            child: Image.asset(
+                              "assets/images/screen.png",
+                              height: height * 0.8,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Mobologics is an experienced Mobile App development and Digital Marketing Company equipped with modern programming languages, powerful tools, efficient developers and digital marketing experts to create the best user experience. We are on a mission to make friendly and fast mobile apps and help you get maximum downloads using our effective digital marketing solutions.",
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                SizedBox(height: height * 0.2),
               ],
             ),
           );

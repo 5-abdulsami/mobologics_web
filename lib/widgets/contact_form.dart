@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/utils/colors.dart';
 import 'package:mobologics_web/widgets/custom_button.dart';
 import 'package:mobologics_web/widgets/custom_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactForm extends StatelessWidget {
-  const ContactForm({super.key});
+  final double width;
+  final double height;
+  const ContactForm({super.key, required this.width, required this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +16,6 @@ class ContactForm extends StatelessWidget {
     var nameController = TextEditingController();
     var emailController = TextEditingController();
     var descriptionController = TextEditingController();
-
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
 
     //submit form
     Future<void> _submitForm() async {
@@ -42,97 +42,101 @@ class ContactForm extends StatelessWidget {
       }
     }
 
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: width > 800 ? 50 : 20),
-      color: whiteColor,
-      elevation: 2,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: width > 800 ? 80 : 20, vertical: 20),
-        child: Center(
-          child: Column(
-            children: [
-              Text(
-                "Contact Us",
-                style: TextStyle(
-                  fontSize: width > 600 ? 70 : 50,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: height * 0.04,
-              ),
-              Text(
-                "Got a question? We'd love to hear from you. Send us a message\nand we'll respond as soon as possible.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: width > 600 ? 16 : 12),
-              ),
-              SizedBox(
-                height: height * 0.07,
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return Center(
+      child: Column(
+        children: [
+          Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Text(
-                      "Name*",
-                      style: TextStyle(fontSize: width > 600 ? 17 : 14),
-                    ),
-                    CustomTextfield(
-                      controller: nameController,
-                      icon: Icons.person,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter your name";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: height * 0.04,
-                    ),
-                    Text(
-                      "Email*",
-                      style: TextStyle(fontSize: width > 600 ? 17 : 14),
-                    ),
-                    CustomTextfield(
-                      controller: emailController,
-                      icon: Icons.mail,
-                      validator: (value) {
-                        if (value == null || !value.contains("@")) {
-                          return "Please enter a valid email";
-                        }
-                        return null;
-                      },
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Your Name",
+                          style: GoogleFonts.poppins(
+                              fontSize: width > 600 ? 17 : 14,
+                              color: whiteColor,
+                              fontWeight: FontWeight.w500,
+                              height: 2.5),
+                        ),
+                        CustomTextfield(
+                          width: width * 0.21,
+                          controller: nameController,
+                          hintText: "Name",
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please enter your name";
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: height * 0.04,
+                      width: width * 0.04,
                     ),
-                    Text(
-                      "Message",
-                      style: TextStyle(fontSize: width > 600 ? 17 : 14),
-                    ),
-                    CustomTextfield(
-                      controller: descriptionController,
-                      maxLines: 5,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Your Email",
+                          style: GoogleFonts.poppins(
+                              fontSize: width > 600 ? 17 : 14,
+                              color: whiteColor,
+                              fontWeight: FontWeight.w500,
+                              height: 2.5),
+                        ),
+                        CustomTextfield(
+                          width: width * 0.21,
+                          controller: emailController,
+                          hintText: "Email",
+                          validator: (value) {
+                            if (value == null || !value.contains("@")) {
+                              return "Please enter a valid email";
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: height * 0.04,
-              ),
-              CustomButton(
-                color: blueColor,
-                width: double.infinity,
-                height: height * 0.07,
-                text: "Send Message",
-                onTap: () => _submitForm(),
-              ),
-            ],
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                Text(
+                  "Your Message",
+                  style: GoogleFonts.poppins(
+                      fontSize: width > 600 ? 17 : 14,
+                      color: whiteColor,
+                      fontWeight: FontWeight.w500,
+                      height: 2.5),
+                ),
+                CustomTextfield(
+                  width: width * 0.46,
+                  controller: descriptionController,
+                  hintText: "Message",
+                  maxLines: 10,
+                ),
+              ],
+            ),
           ),
-        ),
+          SizedBox(
+            height: height * 0.04,
+          ),
+          CustomButton(
+            color: blueColor,
+            width: width * 0.5,
+            height: height * 0.07,
+            text: "Send Message",
+            onTap: () => _submitForm(),
+            icon: Icons.send,
+          ),
+        ],
       ),
     );
   }
