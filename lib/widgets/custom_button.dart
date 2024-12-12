@@ -33,26 +33,26 @@ class CustomButton extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: TextStyle(
-                    color: whiteColor,
-                    fontSize: width > 600 ? 18 : 16,
-                    shadows: [
-                      Shadow(
-                          color: blackColor,
-                          blurRadius: 1.8,
-                          offset: Offset(0, 2.5)),
-                    ]),
+                style:
+                    const TextStyle(color: whiteColor, fontSize: 23, shadows: [
+                  Shadow(
+                      color: blackColor,
+                      blurRadius: 1.8,
+                      offset: Offset(0, 2.5)),
+                ]),
               ),
               SizedBox(
-                width: width * 0.065,
+                width: width * 0.080,
               ),
               Icon(
                 icon,
                 color: whiteColor,
-                size: 20,
-                shadows: [
+                size: 25,
+                shadows: const [
                   Shadow(
-                      color: blackColor, blurRadius: 1.8, offset: Offset(0, 2)),
+                      color: blackColor,
+                      blurRadius: 1.8,
+                      offset: Offset(0, 2.5)),
                 ],
               ),
             ],

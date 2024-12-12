@@ -18,17 +18,17 @@ class HighlightContainer extends StatelessWidget {
       curve: Curves.easeInOut,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-        color: isActive ? bgColor : bgColor,
+        color: isActive ? whiteColor : bgColor,
         border: Border.all(
-          color: isActive ? blueColor : greyColor,
-          width: isActive ? 2 : 1,
+          color: isActive ? whiteColor : greyColor,
+          width: 2,
         ),
         borderRadius: BorderRadius.circular(10),
         boxShadow: isActive
             ? [
                 BoxShadow(
                   color: blueColor.withOpacity(0.5),
-                  blurRadius: 10,
+                  blurRadius: 5,
                   spreadRadius: 1,
                 )
               ]
@@ -39,7 +39,7 @@ class HighlightContainer extends StatelessWidget {
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
-          color: isActive ? blueColor : greyColor,
+          color: isActive ? bgColor : whiteColor,
         ),
         textAlign: TextAlign.center,
       ),

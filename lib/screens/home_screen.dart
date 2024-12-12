@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        // desktop view
         if (constraints.maxWidth > 800) {
           return SingleChildScrollView(
             child: Column(
@@ -83,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Tagline(),
-                              SizedBox(height: height * 0.01),
+                              SizedBox(height: height * 0.02),
                               Column(
                                 children: [
                                   Row(
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   0,
                                         ),
                                       ),
-                                      SizedBox(width: 16),
+                                      SizedBox(width: width * 0.01),
                                       Expanded(
                                         child: HighlightContainer(
                                           text: services[1],
@@ -109,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 16),
+                                  SizedBox(height: height * 0.03),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -122,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   2,
                                         ),
                                       ),
-                                      SizedBox(width: 16),
+                                      SizedBox(width: width * 0.01),
                                       Expanded(
                                         child: HighlightContainer(
                                           text: services[3],
@@ -135,14 +136,14 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ],
                               ),
-                              SizedBox(height: height * 0.025),
+                              SizedBox(height: height * 0.045),
                               Align(
-                                alignment: Alignment.centerLeft,
+                                alignment: Alignment.center,
                                 child: CustomButton(
                                   text: "Get a Quote",
                                   onTap: () {},
                                   height: height * 0.07,
-                                  width: width * 0.141,
+                                  width: width * 0.165,
                                   color: redColor,
                                   icon: Icons.arrow_forward,
                                 ),
@@ -165,13 +166,34 @@ class _HomeScreenState extends State<HomeScreen>
                             },
                             itemBuilder: (context, index) {
                               final actualIndex = index % services.length;
-                              return Center(
-                                child: Image.asset(
-                                  'assets/images/${services[actualIndex].toLowerCase().replaceAll(" ", "_")}.png',
-                                  height: actualIndex == 2
-                                      ? height * 0.8
-                                      : height * 0.65,
-                                  fit: BoxFit.contain,
+
+                              return AnimatedBuilder(
+                                animation: _pageController,
+                                builder: (context, child) {
+                                  double opacity = 0.0;
+                                  if (_pageController.position.haveDimensions) {
+                                    // Calculate the page's fade effect
+                                    double pageOffset =
+                                        _pageController.page! - index;
+                                    opacity = (1 - (pageOffset.abs() * 2))
+                                        .clamp(
+                                            0.0, 1.0); // More fade-out effect
+                                  }
+                                  return Opacity(
+                                    opacity: opacity,
+                                    child: Transform.translate(
+                                      offset: const Offset(0,
+                                          -30), // Moves the image 20 pixels up
+                                      child: child,
+                                    ),
+                                  );
+                                },
+                                child: Center(
+                                  child: Image.asset(
+                                    'assets/images/${services[actualIndex].toLowerCase().replaceAll(" ", "_")}.png',
+                                    height: index == 2 ? height : height * 0.6,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               );
                             },
