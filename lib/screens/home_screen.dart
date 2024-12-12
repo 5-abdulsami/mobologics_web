@@ -1,11 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobologics_web/responsive_view/mobile_home.dart';
+import 'package:mobologics_web/screens/about_us_section.dart';
 import 'package:mobologics_web/utils/colors.dart';
 import 'package:mobologics_web/widgets/custom_button.dart';
-import 'package:mobologics_web/widgets/home_description_text.dart';
+import 'package:mobologics_web/widgets/highlight_container.dart';
+import 'package:mobologics_web/widgets/tagline.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  int currentIndex = 0;
+  late final PageController _pageController;
+
+  final List<String> services = [
+    'Mobile App Development',
+    'Web App Development',
+    'Digital Marketing',
+    'Graphics Designing',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(
+        initialPage:
+            1000); // Start from a high initial page for smooth infinite scrolling
+    _startAutoScroll();
+  }
+
+  void _startAutoScroll() {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          currentIndex++;
+        });
+        _pageController.nextPage(
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.easeInOut,
+        );
+        _startAutoScroll();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +64,10 @@ class HomeScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > 800) {
-          // For desktop view (width > 800)
           return SingleChildScrollView(
-            // Main Page Column
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Hero section with the title and description
                 SizedBox(
                   height: height,
                   child: Row(
@@ -31,46 +77,71 @@ class HomeScreen extends StatelessWidget {
                         flex: 1,
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: width * 0.05,
-                              top: height * 0.14), // Reduced top padding
+                              left: width * 0.05, top: height * 0.14),
                           child: Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment.start, // Align to the top
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "WE CREATE AND MARKET\n",
-                                      style: GoogleFonts.poppins(
-                                        color: whiteColor,
-                                        fontSize: 70,
-                                        fontWeight: FontWeight.bold,
-                                        height: 1,
+                              const Tagline(),
+                              SizedBox(height: height * 0.01),
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: HighlightContainer(
+                                          text: services[0],
+                                          isActive:
+                                              currentIndex % services.length ==
+                                                  0,
+                                        ),
                                       ),
-                                    ),
-                                    TextSpan(
-                                      text: "MOBILE APPS",
-                                      style: GoogleFonts.poppins(
-                                        color: redColor,
-                                        fontSize: 70,
-                                        fontWeight: FontWeight.bold,
-                                        height: 1,
+                                      SizedBox(width: 16),
+                                      Expanded(
+                                        child: HighlightContainer(
+                                          text: services[1],
+                                          isActive:
+                                              currentIndex % services.length ==
+                                                  1,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 16),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: HighlightContainer(
+                                          text: services[2],
+                                          isActive:
+                                              currentIndex % services.length ==
+                                                  2,
+                                        ),
+                                      ),
+                                      SizedBox(width: 16),
+                                      Expanded(
+                                        child: HighlightContainer(
+                                          text: services[3],
+                                          isActive:
+                                              currentIndex % services.length ==
+                                                  3,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              SizedBox(height: height * 0.01), // Reduced space
-                              HomeDescriptionText(),
-                              SizedBox(height: height * 0.025), // Reduced space
+                              SizedBox(height: height * 0.025),
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: CustomButton(
                                   text: "Get a Quote",
                                   onTap: () {},
-                                  height: height * 0.06,
+                                  height: height * 0.07,
                                   width: width * 0.141,
                                   color: redColor,
                                   icon: Icons.arrow_forward,
@@ -84,168 +155,38 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: EdgeInsets.only(
-                              left: width * 0.05,
-                              top: height * 0.001), // Reduced top padding
-                          child: Center(
-                            child: Image.asset(
-                              "assets/images/screen.png",
-                              height: height * 0.8,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // About Us section
-                SizedBox(
-                  height: height,
-                  child: Row(
-                    children: [
-                      // Left section with the text and button
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: width * 0.05,
-                              top: height * 0.14), // Reduced top padding
-                          child: Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment.start, // Align to the top
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "ABOUT ",
-                                      style: GoogleFonts.poppins(
-                                        color: whiteColor,
-                                        fontSize: 70,
-                                        fontWeight: FontWeight.bold,
-                                        height: 1,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: "US",
-                                      style: GoogleFonts.poppins(
-                                        color: redColor,
-                                        fontSize: 70,
-                                        fontWeight: FontWeight.bold,
-                                        height: 1,
-                                      ),
-                                    ),
-                                  ],
+                          padding: const EdgeInsets.only(left: 20),
+                          child: PageView.builder(
+                            controller: _pageController,
+                            onPageChanged: (index) {
+                              setState(() {
+                                currentIndex = index;
+                              });
+                            },
+                            itemBuilder: (context, index) {
+                              final actualIndex = index % services.length;
+                              return Center(
+                                child: Image.asset(
+                                  'assets/images/${services[actualIndex].toLowerCase().replaceAll(" ", "_")}.png',
+                                  height: actualIndex == 2
+                                      ? height * 0.8
+                                      : height * 0.65,
+                                  fit: BoxFit.contain,
                                 ),
-                              ),
-                              SizedBox(height: height * 0.01), // Reduced space
-                              HomeDescriptionText(),
-                              SizedBox(height: height * 0.025), // Reduced space
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Right section with the image
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: width * 0.05,
-                              top: height * 0.001), // Reduced top padding
-                          child: Center(
-                            child: Image.asset(
-                              "assets/images/screen.png",
-                              height: height * 0.8,
-                              fit: BoxFit.contain,
-                            ),
+                              );
+                            },
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
+                const AboutUsSection(),
               ],
             ),
           );
         } else {
-          // For mobile view (width < 800)
-          return SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(color: bgColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Image at the top
-                  Center(
-                    child: Image.asset(
-                      "assets/images/screen.png",
-                      height: height * 0.35,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  // Tagline
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-                    child: RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                          text: "WE CREATE AND MARKET\n",
-                          style: GoogleFonts.poppins(
-                            color: whiteColor,
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold,
-                            height: 1.2,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "MOBILE APPS",
-                          style: GoogleFonts.poppins(
-                            color: redColor,
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold,
-                            height: 1.2,
-                          ),
-                        ),
-                      ]),
-                    ),
-                  ),
-                  SizedBox(height: height * 0.02),
-                  // Description
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-                    child: Text(
-                      "We are a dynamic technology company offering comprehensive solutions in mobile app development, web app development, graphic design, and digital marketing. Our expert team leverages cutting-edge tools and strategies to deliver high-quality, user-centric products that drive business growth and enhance brand presence in the digital landscape.",
-                      style: GoogleFonts.poppins(
-                        color: whiteColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(height: height * 0.04),
-                  // Get a Quote Button
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: CustomButton(
-                        text: "Get a Quote",
-                        onTap: () {},
-                        height: height * 0.06,
-                        width: width * 0.4,
-                        color: redColor,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: height * 0.1),
-                ],
-              ),
-            ),
-          );
+          return MobileHome(height: height, width: width);
         }
       },
     );

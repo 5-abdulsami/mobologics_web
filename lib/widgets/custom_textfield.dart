@@ -26,6 +26,7 @@ class CustomTextfield extends StatelessWidget {
         controller: controller,
         maxLines: maxLines,
         validator: validator,
+        style: TextStyle(color: whiteColor),
         decoration: InputDecoration(
           hintText: hintText,
           filled: true,

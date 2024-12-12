@@ -43,8 +43,13 @@ class ContactForm extends StatelessWidget {
     }
 
     return Center(
+      // main column
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: height * 0.1,
+          ),
           Form(
             key: _formKey,
             child: Column(
@@ -77,7 +82,7 @@ class ContactForm extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      width: width * 0.04,
+                      width: width * 0.03,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +111,7 @@ class ContactForm extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: height * 0.04,
+                  height: height * 0.025,
                 ),
                 Text(
                   "Your Message",
@@ -117,7 +122,7 @@ class ContactForm extends StatelessWidget {
                       height: 2.5),
                 ),
                 CustomTextfield(
-                  width: width * 0.46,
+                  width: width * 0.45,
                   controller: descriptionController,
                   hintText: "Message",
                   maxLines: 10,
@@ -126,11 +131,11 @@ class ContactForm extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: height * 0.04,
+            height: height * 0.025,
           ),
           CustomButton(
             color: blueColor,
-            width: width * 0.5,
+            width: width * 0.15,
             height: height * 0.07,
             text: "Send Message",
             onTap: () => _submitForm(),

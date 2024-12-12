@@ -113,7 +113,7 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
           title,
           style: GoogleFonts.poppins(
             fontSize: isDesktop ? 16 : 14,
-            color: _selectedIndex == index ? redColor : Colors.white,
+            color: _selectedIndex == index ? blueColor : Colors.white,
             fontWeight:
                 _selectedIndex == index ? FontWeight.bold : FontWeight.normal,
           ),
