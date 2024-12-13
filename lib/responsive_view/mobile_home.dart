@@ -77,6 +77,8 @@ class _MobileHomeState extends State<MobileHome> {
                   height: widget.height * 0.06,
                   width: widget.width * 0.4,
                   color: redColor,
+                  fontSize: 14,
+                  iconSize: 15,
                 ),
               ),
             ),

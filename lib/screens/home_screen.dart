@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/responsive_view/mobile_home.dart';
 import 'package:mobologics_web/screens/about_us_section.dart';
 import 'package:mobologics_web/utils/colors.dart';
@@ -140,13 +139,14 @@ class _HomeScreenState extends State<HomeScreen>
                               Align(
                                 alignment: Alignment.center,
                                 child: CustomButton(
-                                  text: "Get a Quote",
-                                  onTap: () {},
-                                  height: height * 0.07,
-                                  width: width * 0.165,
-                                  color: redColor,
-                                  icon: Icons.arrow_forward,
-                                ),
+                                    text: "Get a Quote",
+                                    onTap: () {},
+                                    height: height * 0.07,
+                                    width: width * 0.165,
+                                    color: redColor,
+                                    icon: Icons.arrow_forward,
+                                    fontSize: 21,
+                                    iconSize: 25),
                               ),
                             ],
                           ),
@@ -191,7 +191,11 @@ class _HomeScreenState extends State<HomeScreen>
                                 child: Center(
                                   child: Image.asset(
                                     'assets/images/${services[actualIndex].toLowerCase().replaceAll(" ", "_")}.png',
-                                    height: index == 2 ? height : height * 0.6,
+                                    height: actualIndex == 2
+                                        ? height * 0.85
+                                        : actualIndex == 3
+                                            ? height * 0.7
+                                            : height * 0.63,
                                     fit: BoxFit.contain,
                                   ),
                                 ),

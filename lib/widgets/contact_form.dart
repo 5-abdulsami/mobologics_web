@@ -140,6 +140,8 @@ class ContactForm extends StatelessWidget {
             text: "Send Message",
             onTap: () => _submitForm(),
             icon: Icons.send,
+            fontSize: 18,
+            iconSize: 20,
           ),
         ],
       ),
