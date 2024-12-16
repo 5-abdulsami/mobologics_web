@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobologics_web/responsive_view/mobile_home.dart';
 import 'package:mobologics_web/screens/about_us_section.dart';
 import 'package:mobologics_web/utils/colors.dart';
 import 'package:mobologics_web/widgets/custom_button.dart';
 import 'package:mobologics_web/widgets/highlight_container.dart';
+import 'package:mobologics_web/widgets/portfolio.dart';
 import 'package:mobologics_web/widgets/tagline.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -140,7 +142,10 @@ class _HomeScreenState extends State<HomeScreen>
                                 alignment: Alignment.center,
                                 child: CustomButton(
                                     text: "Get a Quote",
-                                    onTap: () {},
+                                    onTap: () {
+                                      context.go(
+                                          '/contact'); // For replacing the current route
+                                    },
                                     height: height * 0.07,
                                     width: width * 0.165,
                                     color: redColor,
@@ -208,6 +213,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
                 const AboutUsSection(),
+                const Portfolio(),
               ],
             ),
           );

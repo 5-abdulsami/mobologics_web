@@ -7,6 +7,7 @@ import 'package:mobologics_web/screens/team_screen.dart';
 import 'package:mobologics_web/screens/careers_screen.dart';
 import 'package:mobologics_web/screens/contact_us_screen.dart';
 import 'package:mobologics_web/utils/colors.dart';
+import 'package:mobologics_web/widgets/footer.dart';
 
 class WebsiteNavigator extends StatefulWidget {
   final int initialIndex;
@@ -47,8 +48,7 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
       _selectedIndex = index;
     });
     final newRoute = _routes[index];
-    GoRouter.of(context)
-        .go(newRoute); // Updates the URL without pushing a new route.
+    GoRouter.of(context).go(newRoute);
   }
 
   @override
@@ -90,7 +90,14 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
           ],
         ),
       ),
-      body: _pages[_selectedIndex], // Dynamically updates the body.
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _pages[_selectedIndex], // Page content
+            const Footer(), // Using the new Footer widget
+          ],
+        ),
+      ),
     );
   }
 
@@ -118,6 +125,69 @@ class _WebsiteNavigatorState extends State<WebsiteNavigator> {
                 _selectedIndex == index ? FontWeight.bold : FontWeight.normal,
           ),
         ),
+      ),
+    );
+  }
+
+  // Footer Widget
+  Widget _buildFooter() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+      color: bgColor,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Divider(
+            color: textFieldColor,
+          ),
+          Text(
+            "© 2024 Mobologics | All Rights Reserved",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _footerLink("Privacy Policy"),
+              _divider(),
+              _footerLink("Terms of Service"),
+              _divider(),
+              _footerLink("Contact"),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _footerLink(String text) {
+    return InkWell(
+      onTap: () {
+        print("$text clicked");
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Text(
+          text,
+          style: GoogleFonts.poppins(
+            color: Colors.blueAccent,
+            fontSize: 12,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _divider() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.0),
+      child: Text(
+        "|",
+        style: TextStyle(color: Colors.white, fontSize: 14),
       ),
     );
   }

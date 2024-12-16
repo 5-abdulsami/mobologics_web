@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/utils/colors.dart';
 import 'package:mobologics_web/widgets/custom_button.dart';
@@ -45,49 +46,55 @@ class _ServicesScreenState extends State<ServicesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width * 1;
-    var height = MediaQuery.of(context).size.height * 1;
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: width * 0.05, vertical: height * 0.05),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: height * 0.07,
-          ),
-          Text(
-            'Our Services',
-            style: GoogleFonts.poppins(
-              color: whiteColor,
-              fontSize: 45,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: height * 0.024),
-          // Tabs Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: List.generate(
-              services.length,
-              (index) => ServiceTab(
-                title: services[index]['title']!,
-                isActive: _activeIndex == index,
-                onTap: () {
-                  setState(() {
-                    _activeIndex = index;
-                  });
-                },
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+
+    return SingleChildScrollView(
+      // Make the content scrollable
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.05, vertical: height * 0.05),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: height * 0.07),
+            RichText(
+                text: TextSpan(children: [
+              TextSpan(
+                  text: "Our ",
+                  style: GoogleFonts.poppins(
+                      color: whiteColor,
+                      fontSize: 60,
+                      fontWeight: FontWeight.bold)),
+              TextSpan(
+                  text: "Services",
+                  style: GoogleFonts.poppins(
+                      color: blueColor,
+                      fontSize: 60,
+                      fontWeight: FontWeight.bold)),
+            ])),
+            SizedBox(height: height * 0.024),
+            // Tabs Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: List.generate(
+                services.length,
+                (index) => ServiceTab(
+                  title: services[index]['title']!,
+                  isActive: _activeIndex == index,
+                  onTap: () {
+                    setState(() {
+                      _activeIndex = index;
+                    });
+                  },
+                ),
               ),
             ),
-          ),
-          SizedBox(height: height * 0.01),
-          // Content Section
-          Expanded(
-            child: Row(
+            SizedBox(height: height * 0.01),
+            // Content Section
+            Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Description Section
                 Expanded(
                   flex: 2,
                   child: Column(
@@ -101,12 +108,12 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           height: 1.5,
                         ),
                       ),
-                      SizedBox(
-                        height: height * 0.08,
-                      ),
+                      SizedBox(height: height * 0.08),
                       CustomButton(
                         text: "Request Services",
-                        onTap: () {},
+                        onTap: () {
+                          context.go('/contact');
+                        },
                         height: height * 0.075,
                         width: width * 0.17,
                         color: redColor,
@@ -116,7 +123,6 @@ class _ServicesScreenState extends State<ServicesScreen> {
                   ),
                 ),
                 SizedBox(width: width * 0.07),
-                // Image Section with AnimatedSwitcher
                 Expanded(
                   child: AnimatedSwitcher(
                     duration: Duration(milliseconds: 300),
@@ -129,16 +135,15 @@ class _ServicesScreenState extends State<ServicesScreen> {
                     },
                     child: Image.asset(
                       services[_activeIndex]['image']!,
-                      key: ValueKey<int>(
-                          _activeIndex), // Unique key for each image
+                      key: ValueKey<int>(_activeIndex),
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
