@@ -55,12 +55,14 @@ class _PortfolioState extends State<Portfolio> {
         });
       } else if (_scrollController.offset >=
           _scrollController.position.maxScrollExtent) {
+        // user reached right most
         setState(() {
           _canScrollLeft = true;
           _canScrollRight = false;
         });
       } else {
         setState(() {
+          // when in between
           _canScrollLeft = true;
           _canScrollRight = true;
         });
@@ -139,7 +141,7 @@ class _PortfolioState extends State<Portfolio> {
                         _scrollController.animateTo(
                           _scrollController.offset -
                               width * 0.35, // Scroll step backward
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         );
                       },
@@ -154,10 +156,10 @@ class _PortfolioState extends State<Portfolio> {
                           margin: EdgeInsets.only(bottom: height * 0.05),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
+                            color: blackColor.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.arrow_back_ios,
                               color: whiteColor,
@@ -179,7 +181,7 @@ class _PortfolioState extends State<Portfolio> {
                         _scrollController.animateTo(
                           _scrollController.offset +
                               width * 0.35, // Scroll step
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         );
                       },
@@ -194,10 +196,10 @@ class _PortfolioState extends State<Portfolio> {
                           margin: EdgeInsets.only(bottom: height * 0.05),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
+                            color: blackColor.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_forward_ios,
                             color: whiteColor,
                             size: 20,

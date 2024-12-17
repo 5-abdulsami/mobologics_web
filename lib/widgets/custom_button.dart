@@ -46,14 +46,15 @@ class CustomButton extends StatelessWidget {
                   color: whiteColor,
                   fontSize: fontSize,
                   shadows: [
-                    Shadow(
+                    const Shadow(
                       color: blackColor,
                       blurRadius: 1.8,
-                      offset: const Offset(0, 2.5),
+                      offset: Offset(0, 2.5),
                     ),
                   ],
                 ),
               ),
+              // when icon is not null, insert the widgets in this list into the widget tree
               if (icon != null) ...[
                 SizedBox(
                   width: width * 0.08, // Space between text and icon

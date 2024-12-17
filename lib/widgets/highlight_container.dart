@@ -4,16 +4,21 @@ import 'package:mobologics_web/utils/colors.dart';
 class HighlightContainer extends StatelessWidget {
   final String text;
   final bool isActive;
+  final bool? mobileView;
 
   const HighlightContainer({
     required this.text,
     required this.isActive,
+    this.mobileView = false,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
+      constraints: BoxConstraints(
+        minWidth: mobileView == true ? 220 : 100,
+      ),
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),

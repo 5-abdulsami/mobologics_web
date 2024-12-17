@@ -3,18 +3,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/utils/colors.dart';
 
 class Tagline extends StatelessWidget {
-  const Tagline({super.key});
+  final double fontSize;
+  const Tagline({super.key, required this.fontSize});
 
   @override
   Widget build(BuildContext context) {
     return RichText(
+      textAlign: TextAlign.center,
       text: TextSpan(
         children: [
           TextSpan(
             text: "WE CREATE AND MARKET\n",
             style: GoogleFonts.poppins(
               color: whiteColor,
-              fontSize: 70,
+              fontSize: fontSize,
               fontWeight: FontWeight.bold,
               height: 1,
             ),
@@ -23,7 +25,7 @@ class Tagline extends StatelessWidget {
             text: "MOBILE APPS",
             style: GoogleFonts.poppins(
               color: redColor,
-              fontSize: 70,
+              fontSize: fontSize,
               fontWeight: FontWeight.bold,
               height: 1,
             ),

@@ -7,10 +7,10 @@ class CustomTextfield extends StatelessWidget {
   final String hintText;
   final double width;
 
-  int? maxLines;
-  String? Function(String? value)? validator;
+  final int? maxLines;
+  final String? Function(String? value)? validator;
 
-  CustomTextfield(
+  const CustomTextfield(
       {super.key,
       required this.controller,
       this.maxLines = 1,
@@ -26,7 +26,7 @@ class CustomTextfield extends StatelessWidget {
         controller: controller,
         maxLines: maxLines,
         validator: validator,
-        style: TextStyle(color: whiteColor),
+        style: const TextStyle(color: whiteColor),
         decoration: InputDecoration(
           hintText: hintText,
           filled: true,

@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen>
     _pageController = PageController(
         initialPage:
             1000); // Start from a high initial page for smooth infinite scrolling
-    _startAutoScroll();
+    // _startAutoScroll();
   }
 
   void _startAutoScroll() {
@@ -84,7 +84,9 @@ class _HomeScreenState extends State<HomeScreen>
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Tagline(),
+                              const Tagline(
+                                fontSize: 70,
+                              ),
                               SizedBox(height: height * 0.02),
                               Column(
                                 children: [

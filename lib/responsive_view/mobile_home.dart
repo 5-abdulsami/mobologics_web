@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobologics_web/responsive_view/mobile_about_us_section.dart';
+import 'package:mobologics_web/responsive_view/mobile_portfolio_section.dart';
 import 'package:mobologics_web/utils/colors.dart';
 import 'package:mobologics_web/widgets/custom_button.dart';
+import 'package:mobologics_web/widgets/highlight_container.dart';
+import 'package:mobologics_web/widgets/tagline.dart';
 
 class MobileHome extends StatefulWidget {
   final double height;
@@ -13,77 +17,140 @@ class MobileHome extends StatefulWidget {
 }
 
 class _MobileHomeState extends State<MobileHome> {
+  int currentIndex = 0; // Track active highlight container
+  final List<String> services = [
+    'Mobile App Development',
+    'Web App Development',
+    'Digital Marketing',
+    'Graphics Designing',
+  ];
+
+  final List<String> images = [
+    "assets/images/mobile_app_development.png", // Mobile App Development
+    "assets/images/web_app_development.png", // Web App Development
+    "assets/images/digital_marketing.png", // Digital Marketing
+    "assets/images/graphics_designing.png", // Graphics Designing
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoScroll(); // Start the auto-scroll mechanism when the screen loads
+  }
+
+  void _startAutoScroll() {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          currentIndex = (currentIndex + 1) % services.length;
+        });
+        _startAutoScroll();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         decoration: const BoxDecoration(color: bgColor),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Image.asset(
-                "assets/images/mobile_app_development.png",
-                height: widget.height * 0.35,
-                fit: BoxFit.contain,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Tagline at the top
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: widget.width * 0.03),
+                child: const Center(
+                  child: Tagline(fontSize: 40),
+                ), // Assuming you have a Tagline widget that shows the text
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: widget.width * 0.05),
-              child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                    text: "WE CREATE AND MARKET\n",
-                    style: GoogleFonts.poppins(
-                      color: whiteColor,
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold,
-                      height: 1.2,
+              SizedBox(height: widget.height * 0.02),
+
+              // First row of HighlightContainers
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: widget.width * 0.05),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    HighlightContainer(
+                      mobileView: true,
+                      text: services[0],
+                      isActive: currentIndex == 0,
                     ),
-                  ),
-                  TextSpan(
-                    text: "MOBILE APPS",
-                    style: GoogleFonts.poppins(
-                      color: redColor,
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold,
-                      height: 1.2,
+                    HighlightContainer(
+                      mobileView: true,
+                      text: services[1],
+                      isActive: currentIndex == 1,
                     ),
-                  ),
-                ]),
-              ),
-            ),
-            SizedBox(height: widget.height * 0.02),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: widget.width * 0.05),
-              child: Text(
-                "We are a dynamic technology company offering comprehensive solutions in mobile app development, web app development, graphic design, and digital marketing. Our expert team leverages cutting-edge tools and strategies to deliver high-quality, user-centric products that drive business growth and enhance brand presence in the digital landscape.",
-                style: GoogleFonts.poppins(
-                  color: whiteColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(height: widget.height * 0.04),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: widget.width * 0.05),
-              child: Align(
-                alignment: Alignment.center,
-                child: CustomButton(
-                  text: "Get a Quote",
-                  onTap: () {},
-                  height: widget.height * 0.06,
-                  width: widget.width * 0.4,
-                  color: redColor,
-                  fontSize: 14,
-                  iconSize: 15,
+                  ],
                 ),
               ),
-            ),
-            SizedBox(height: widget.height * 0.1),
-          ],
+              SizedBox(height: widget.height * 0.02),
+
+              // Second row of HighlightContainers
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: widget.width * 0.05),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    HighlightContainer(
+                      mobileView: true,
+                      text: services[2],
+                      isActive: currentIndex == 2,
+                    ),
+                    HighlightContainer(
+                      mobileView: true,
+                      text: services[3],
+                      isActive: currentIndex == 3,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: widget.height * 0.04),
+
+              // Custom Button
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: widget.width * 0.05),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: CustomButton(
+                    text: "Get a Quote",
+                    onTap: () {},
+                    height: widget.height * 0.06,
+                    width: widget.width * 0.4,
+                    color: redColor,
+                    fontSize: 14,
+                    iconSize: 15,
+                  ),
+                ),
+              ),
+              SizedBox(height: widget.height * 0.1),
+
+              // Animated Image based on the active container
+              Center(
+                child: AnimatedSwitcher(
+                  duration: const Duration(seconds: 1),
+                  child: Image.asset(
+                    images[currentIndex],
+                    key: ValueKey<int>(
+                        currentIndex), // Ensure the image updates when currentIndex changes
+                    height: widget.height *
+                        0.4, // Adjust the height for the image as needed
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              SizedBox(height: widget.height * 0.1),
+
+              // Mobile About Us Section
+              MobileAboutUsSection(height: widget.height, width: widget.width),
+
+              // Mobile Portfolio Section
+              MobilePortfolio(height: widget.height, width: widget.width),
+            ],
+          ),
         ),
       ),
     );
