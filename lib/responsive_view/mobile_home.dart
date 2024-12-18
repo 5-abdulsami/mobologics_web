@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/responsive_view/mobile_about_us_section.dart';
 import 'package:mobologics_web/responsive_view/mobile_portfolio_section.dart';
+import 'package:mobologics_web/responsive_view/mobile_team_section.dart';
 import 'package:mobologics_web/utils/colors.dart';
 import 'package:mobologics_web/widgets/custom_button.dart';
 import 'package:mobologics_web/widgets/highlight_container.dart';
@@ -59,14 +60,15 @@ class _MobileHomeState extends State<MobileHome> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: widget.height * 0.055),
               // Tagline at the top
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: widget.width * 0.03),
                 child: const Center(
-                  child: Tagline(fontSize: 40),
-                ), // Assuming you have a Tagline widget that shows the text
+                  child: Tagline(fontSize: 50),
+                ),
               ),
-              SizedBox(height: widget.height * 0.02),
+              SizedBox(height: widget.height * 0.04),
 
               // First row of HighlightContainers
               Padding(
@@ -149,6 +151,9 @@ class _MobileHomeState extends State<MobileHome> {
 
               // Mobile Portfolio Section
               MobilePortfolio(height: widget.height, width: widget.width),
+
+              // Mobile Team Section
+              MobileTeamSection(height: widget.height, width: widget.width),
             ],
           ),
         ),

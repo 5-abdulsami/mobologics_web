@@ -18,15 +18,20 @@ class PortfolioItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    // Adjust container and image sizes dynamically
+    final containerWidth = mobileView ? width * 0.8 : width * 0.3;
+    final containerHeight = mobileView ? height * 0.4 : height * 0.5;
+    final imageWidth = mobileView ? containerWidth * 0.7 : containerWidth * 0.8;
+    final imageHeight =
+        mobileView ? containerHeight * 0.4 : containerHeight * 0.5;
 
     return Container(
-      width: mobileView
-          ? width * 0.25
-          : width * 0.4, // Adjust image size for better fit
-      height: mobileView ? height * 0.3 : height * 0.4,
-      padding: const EdgeInsets.all(10),
+      width: containerWidth,
+      height: containerHeight,
+      padding: EdgeInsets.all(containerWidth * 0.05),
       decoration: BoxDecoration(
         color: textFieldColor,
         borderRadius: BorderRadius.circular(12),
@@ -37,12 +42,8 @@ class PortfolioItem extends StatelessWidget {
         children: [
           // App icon (image)
           Container(
-            width: mobileView
-                ? width * 0.3
-                : width * 0.4, // Adjust image size for better fit
-            height: mobileView
-                ? height * 0.1
-                : height * 0.2, // Adjust image size for better fit
+            width: imageWidth,
+            height: imageHeight,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
@@ -51,25 +52,25 @@ class PortfolioItem extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: height * 0.02),
+          SizedBox(height: containerHeight * 0.05),
           // App name (title)
           Text(
             title,
             style: GoogleFonts.poppins(
               color: whiteColor,
-              fontSize: 18,
+              fontSize: mobileView ? 16 : 18,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: height * 0.01),
+          SizedBox(height: containerHeight * 0.02),
           // Description text
           Text(
             description,
             textAlign: TextAlign.center,
             style: GoogleFonts.poppins(
               color: whiteColor,
-              fontSize: 14,
+              fontSize: mobileView ? 12 : 14,
               height: 1.5,
             ),
             maxLines: 3,

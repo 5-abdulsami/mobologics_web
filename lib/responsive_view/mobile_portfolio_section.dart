@@ -1,35 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/utils/colors.dart';
+import 'package:mobologics_web/utils/constants.dart';
 import 'package:mobologics_web/widgets/portfolio_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MobilePortfolio extends StatelessWidget {
   final double height;
   final double width;
   MobilePortfolio({super.key, required this.height, required this.width});
-
-  final List<Map<String, String>> portfolioItems = [
-    {
-      'title': 'Ai Grammar Checker & \nAi Writer',
-      'description': 'Developing scalable and intuitive mobile apps.',
-      'image': 'assets/images/mobile_app_development.png',
-    },
-    {
-      'title': 'Ai Math Solver',
-      'description': 'Building feature-rich web applications.',
-      'image': 'assets/images/web_app_development.png',
-    },
-    {
-      'title': 'Live MAPS & GPS Navigation',
-      'description': 'Creative designs for all your branding needs.',
-      'image': 'assets/images/graphics_designing.png',
-    },
-    {
-      'title': 'Live Video Chat & Ai Friend',
-      'description': 'User-centric UI/UX designs that enhance experience.',
-      'image': 'assets/images/digital_marketing.png',
-    }
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +27,14 @@ class MobilePortfolio extends StatelessWidget {
                   text: "Our ",
                   style: GoogleFonts.poppins(
                       color: Colors.white,
-                      fontSize: 35,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
                   text: "Portfolio",
                   style: GoogleFonts.poppins(
                       color: redColor,
-                      fontSize: 35,
+                      fontSize: 40,
                       fontWeight: FontWeight.bold),
                 ),
               ]),
@@ -71,11 +52,15 @@ class MobilePortfolio extends StatelessWidget {
               ),
               itemCount: portfolioItems.length,
               itemBuilder: (context, index) {
-                return PortfolioItem(
-                  mobileView: true,
-                  title: portfolioItems[index]['title']!,
-                  description: portfolioItems[index]['description']!,
-                  image: portfolioItems[index]['image']!,
+                return InkWell(
+                  onTap: () =>
+                      launchURL(context, portfolioItems[index]['link']!),
+                  child: PortfolioItem(
+                    mobileView: true,
+                    title: portfolioItems[index]['title']!,
+                    description: portfolioItems[index]['description']!,
+                    image: portfolioItems[index]['image']!,
+                  ),
                 );
               },
             ),
