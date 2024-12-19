@@ -17,24 +17,24 @@ class MobileAboutUsSection extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: width * 0.05, vertical: height * 0.04),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RichText(
               text: TextSpan(children: [
                 TextSpan(
-                  text: "ABOUT ",
+                  text: "About ",
                   style: GoogleFonts.poppins(
                     color: whiteColor,
-                    fontSize: 35,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                     height: 1,
                   ),
                 ),
                 TextSpan(
-                  text: "US",
+                  text: "Us",
                   style: GoogleFonts.poppins(
-                    color: redColor,
-                    fontSize: 35,
+                    color: blueColor,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                     height: 1,
                   ),

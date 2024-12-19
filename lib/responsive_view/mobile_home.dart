@@ -120,10 +120,10 @@ class _MobileHomeState extends State<MobileHome> {
                   child: CustomButton(
                     text: "Get a Quote",
                     onTap: () {},
-                    height: widget.height * 0.06,
+                    height: widget.height * 0.07,
                     width: widget.width * 0.4,
                     color: redColor,
-                    fontSize: 14,
+                    fontSize: 18,
                     iconSize: 15,
                   ),
                 ),

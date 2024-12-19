@@ -16,22 +16,35 @@ class ServiceTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    bool isMobile = width < 600;
+
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        margin: const EdgeInsets.only(right: 15),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: EdgeInsets.only(right: isMobile ? 8 : 12),
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? 12 : 16,
+          vertical: isMobile ? 8 : 12,
+        ),
+        width: width * (isMobile ? 0.4 : 0.135),
+        height: height * (isMobile ? 0.08 : 0.07),
         decoration: BoxDecoration(
           color: isActive ? blueColor : textFieldColor,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(isMobile ? 20 : 15),
         ),
-        child: Text(
-          title,
-          style: GoogleFonts.poppins(
-            color: whiteColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+        child: Center(
+          child: Text(
+            title,
+            style: GoogleFonts.poppins(
+              color: whiteColor,
+              fontSize: isMobile ? 15 : 16,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

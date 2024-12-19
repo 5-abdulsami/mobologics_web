@@ -29,7 +29,7 @@ class AboutUsSection extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "ABOUT ",
+                          text: "About ",
                           style: GoogleFonts.poppins(
                             color: whiteColor,
                             fontSize: 70,
@@ -38,9 +38,9 @@ class AboutUsSection extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: "US",
+                          text: "Us",
                           style: GoogleFonts.poppins(
-                            color: redColor,
+                            color: blueColor,
                             fontSize: 70,
                             fontWeight: FontWeight.bold,
                             height: 1,

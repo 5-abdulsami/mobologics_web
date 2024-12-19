@@ -56,14 +56,14 @@ class _TeamSectionState extends State<TeamSection> {
                     text: "Our ",
                     style: GoogleFonts.poppins(
                         color: whiteColor,
-                        fontSize: 50,
+                        fontSize: 60,
                         fontWeight: FontWeight.bold),
                   ),
                   TextSpan(
                     text: "Team",
                     style: GoogleFonts.poppins(
                         color: blueColor,
-                        fontSize: 50,
+                        fontSize: 60,
                         fontWeight: FontWeight.bold),
                   ),
                 ],
