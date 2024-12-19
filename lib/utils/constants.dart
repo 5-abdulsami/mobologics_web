@@ -51,9 +51,22 @@ final List<Map<String, String>> portfolioItems = [
 
 Future<void> launchURL(BuildContext context, String url) async {
   try {
-    await launchUrl(Uri.parse(url));
+    final uri = Uri.parse(url);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+      webOnlyWindowName: '_blank', // Opens in a new tab for web
+    )) {
+      log('Could not launch $url');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to open the link.')),
+      );
+    }
   } catch (e) {
-    log(e.toString());
+    log('Error launching URL: $e');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error: $e')),
+    );
   }
 }
 

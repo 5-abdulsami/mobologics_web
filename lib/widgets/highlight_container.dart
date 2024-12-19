@@ -15,9 +15,10 @@ class HighlightContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width * 1;
     return AnimatedContainer(
       constraints: BoxConstraints(
-        minWidth: mobileView == true ? 220 : 100,
+        minWidth: mobileView == true ? width * 0.42 : width * 0.18,
       ),
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,

@@ -31,7 +31,7 @@ class ServiceTab extends StatelessWidget {
           vertical: isMobile ? 8 : 12,
         ),
         width: width * (isMobile ? 0.4 : 0.135),
-        height: height * (isMobile ? 0.08 : 0.07),
+        height: height * (isMobile ? 0.08 : 0.075),
         decoration: BoxDecoration(
           color: isActive ? blueColor : textFieldColor,
           borderRadius: BorderRadius.circular(isMobile ? 20 : 15),
