@@ -23,8 +23,8 @@ class TeamMember extends StatelessWidget {
 
     // Define responsive container sizes
     final avatarRadius = mobileView ? width * 0.15 : width * 0.075;
-    final nameFontSize = mobileView ? width * 0.05 : width * 0.021;
-    final designationFontSize = mobileView ? width * 0.04 : width * 0.014;
+    final nameFontSize = mobileView ? width * 0.04 : width * 0.021;
+    final designationFontSize = mobileView ? width * 0.034 : width * 0.014;
     final spacing = mobileView ? height * 0.015 : height * 0.01;
 
     return Column(
