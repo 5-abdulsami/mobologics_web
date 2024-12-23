@@ -163,7 +163,10 @@ class _HomeSectionState extends State<HomeSection>
                                   ),
                                 ],
                               ),
-                              SizedBox(height: height * 0.045),
+                              SizedBox(
+                                  height: width > 600 && width < 800
+                                      ? height * 0.023
+                                      : height * 0.045),
                               Align(
                                 alignment: Alignment.center,
                                 child: CustomButton(
@@ -176,8 +179,8 @@ class _HomeSectionState extends State<HomeSection>
                                     width: width * 0.165,
                                     color: redColor,
                                     icon: Icons.arrow_forward,
-                                    fontSize: 21,
-                                    iconSize: 25),
+                                    fontSize: width * 0.015,
+                                    iconSize: width * 0.020),
                               ),
                             ],
                           ),

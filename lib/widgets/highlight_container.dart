@@ -15,14 +15,23 @@ class HighlightContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width * 1;
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+
+    // Determine container size
+    double containerWidth = mobileView == true ? width * 0.4 : width * 0.18;
+    double containerHeight = mobileView == true
+        ? height * 0.07
+        : width > 600 && width < 800
+            ? height * 0.065
+            : height * 0.085;
+
     return AnimatedContainer(
-      constraints: BoxConstraints(
-        minWidth: mobileView == true ? width * 0.42 : width * 0.18,
-      ),
+      width: containerWidth,
+      height: containerHeight,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         color: isActive ? whiteColor : bgColor,
         border: Border.all(
@@ -40,14 +49,16 @@ class HighlightContainer extends StatelessWidget {
               ]
             : [],
       ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: isActive ? bgColor : whiteColor,
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: mobileView == true ? width * 0.031 : width * 0.015,
+            fontWeight: FontWeight.w600,
+            color: isActive ? bgColor : whiteColor,
+          ),
+          textAlign: TextAlign.center,
         ),
-        textAlign: TextAlign.center,
       ),
     );
   }

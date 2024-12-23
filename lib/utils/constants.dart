@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 final List<Map<String, String>> androidPortfolioItems = [
   {
-    'title': 'Ai Grammar Checker & \nAi Writer',
+    'title': 'Ai Grammar Checker',
     'description':
         'Effortlessly correct grammar and create AI-powered content.',
     'image': 'assets/images/app_icons/grammar.png',
@@ -115,11 +115,16 @@ List<Map<String, String>> get allPortfolioItems =>
 Future<void> launchURL(BuildContext context, String url) async {
   try {
     final uri = Uri.parse(url);
-    if (!await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-      webOnlyWindowName: '_blank', // Opens in a new tab for web
-    )) {
+
+    // Check if the platform can launch the URL
+    if (await canLaunchUrl(uri)) {
+      // For web, ensure it opens in a new tab
+      await launchUrl(
+        uri,
+        mode: LaunchMode
+            .externalApplication, // External app or new tab in the browser
+      );
+    } else {
       log('Could not launch $url');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to open the link.')),

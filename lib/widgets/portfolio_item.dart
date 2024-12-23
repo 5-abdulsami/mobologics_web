@@ -23,10 +23,10 @@ class PortfolioItem extends StatelessWidget {
 
     // Adjust container and image sizes dynamically
     final containerWidth = mobileView ? width * 0.8 : width * 0.3;
-    final containerHeight = mobileView ? height * 0.4 : height * 0.5;
+    final containerHeight = mobileView ? height * 0.57 : height * 0.515;
     final imageWidth = mobileView ? containerWidth * 0.7 : containerWidth * 0.8;
     final imageHeight =
-        mobileView ? containerHeight * 0.4 : containerHeight * 0.5;
+        mobileView ? containerHeight * 0.3 : containerHeight * 0.5;
 
     return Container(
       width: containerWidth,
