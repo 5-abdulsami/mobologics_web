@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final List<Map<String, String>> portfolioItems = [
+final List<Map<String, String>> androidPortfolioItems = [
   {
     'title': 'Ai Grammar Checker & \nAi Writer',
     'description':
@@ -18,6 +18,20 @@ final List<Map<String, String>> portfolioItems = [
     'image': 'assets/images/app_icons/math_solver.png',
     'link':
         'https://play.google.com/store/apps/details?id=com.ai_math_solver_ai_mathphoto_solver.aistudycompanion&gl=pk',
+  },
+  {
+    'title': 'Ai Plant Identifier by Picture',
+    'description': 'Identify any plant or a plant disease with just a photo!',
+    'image': 'assets/images/app_icons/plant.png',
+    'link':
+        'https://play.google.com/store/apps/details?id=com.plantidentifiereasy.aiplantexploreandidentify&gl=pk',
+  },
+  {
+    'title': 'Speak & Translate Interpreter',
+    'description': 'Translate conversations & fix grammar on the go!',
+    'image': 'assets/images/app_icons/speak.png',
+    'link':
+        'https://play.google.com/store/apps/details?id=com.alllanguagetranslator.voicetranslation&gl=pk',
   },
   {
     'title': 'Ai English Dictionary',
@@ -48,6 +62,55 @@ final List<Map<String, String>> portfolioItems = [
         'https://play.google.com/store/apps/details?id=com.islamicworld.qurankareem',
   },
 ];
+
+final List<Map<String, String>> iosPortfolioItems = [
+  {
+    'title': 'PDF Viewer, Editor & Converter',
+    'description': 'Manage PDFs with Ease',
+    'image': 'assets/images/app_icons/pdf.png',
+    'link':
+        'https://apps.apple.com/us/app/pdf-viewer-editor-converter/id6443897218',
+  },
+  {
+    'title': 'VidGenius - Ai Video Generator',
+    'description': 'Generate Videos with AI',
+    'image': 'assets/images/app_icons/vidgenious.png',
+    'link':
+        'https://apps.apple.com/us/app/vidgenius-ai-video-generator/id6467833017',
+  },
+  {
+    'title': 'Nudge - Notes and Reminders',
+    'description': 'Never miss a task - Reminders & Notes at your fingertips!',
+    'image': 'assets/images/app_icons/nudge.png',
+    'link':
+        'https://apps.apple.com/us/app/nudge-notes-and-reminders/id1507376029',
+  },
+  {
+    'title': 'Text to Speech - Voice Typing',
+    'description': 'Speak your thoughts, hear your text!',
+    'image': 'assets/images/app_icons/voice_typing.png',
+    'link':
+        'https://apps.apple.com/us/app/text-to-speech-voice-typing/id1514560624',
+  },
+  {
+    'title': 'IslamHQ: Quran, Qibla & Prayer',
+    'description': 'Your Islamic Companion: Quran, Prayer Times & Qibla Finder',
+    'image': 'assets/images/app_icons/islamhq.png',
+    'link':
+        'https://apps.apple.com/us/app/text-to-speech-voice-typing/id1514560624',
+  },
+  {
+    'title': 'Metal Detector & Sound Meter',
+    'description': 'Detect Metal, Measure Sound',
+    'image': 'assets/images/app_icons/metal.png',
+    'link':
+        'https://apps.apple.com/us/app/metal-detector-sound-meter/id6478269346',
+  },
+]; // Empty for now
+
+// Combine all items
+List<Map<String, String>> get allPortfolioItems =>
+    [...androidPortfolioItems, ...iosPortfolioItems];
 
 Future<void> launchURL(BuildContext context, String url) async {
   try {
