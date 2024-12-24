@@ -102,7 +102,7 @@ class _MobilePortfolioState extends State<MobilePortfolio> {
                 crossAxisCount: 2,
                 crossAxisSpacing: width * 0.05,
                 mainAxisSpacing: height * 0.03,
-                childAspectRatio: 0.75, // Adjust as needed for item proportions
+                childAspectRatio: 0.7, // Adjusted for more flexible height
               ),
               itemCount: getCurrentPortfolioItems().length,
               itemBuilder: (context, index) {
@@ -117,7 +117,7 @@ class _MobilePortfolioState extends State<MobilePortfolio> {
                   ),
                 );
               },
-            ),
+            )
           ],
         ),
       ),

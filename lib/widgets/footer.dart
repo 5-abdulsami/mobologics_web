@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobologics_web/utils/colors.dart';
 
@@ -23,7 +24,7 @@ class Footer extends StatelessWidget {
             height: height * 0.04,
           ),
           Text(
-            "© 2024 Mobologics | All Rights Reserved",
+            "© Mobologics | All Rights Reserved",
             style: GoogleFonts.poppins(
               color: Colors.white,
               fontSize: 16,
@@ -33,11 +34,9 @@ class Footer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _footerLink("Privacy Policy"),
+              _footerLink(context, "Privacy Policy"),
               _divider(),
-              _footerLink("Terms of Service"),
-              _divider(),
-              _footerLink("Contact"),
+              _footerLink(context, "Contact Us"),
             ],
           ),
         ],
@@ -45,17 +44,17 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _footerLink(String text) {
+  Widget _footerLink(BuildContext context, String text) {
     return InkWell(
       onTap: () {
-        print("$text clicked");
+        context.go('/contact');
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Text(
           text,
           style: GoogleFonts.poppins(
-            color: Colors.blueAccent,
+            color: blueColor,
             fontSize: 14,
           ),
         ),

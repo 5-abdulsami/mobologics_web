@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:mobologics_web/utils/colors.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'dart:html' as html;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,19 +46,25 @@ class MyApp extends StatelessWidget {
       routerConfig: GoRouter(
         routes: [
           GoRoute(
-            path: '/',
-            builder: (context, state) =>
-                const WebsiteNavigator(initialIndex: 0),
-          ),
+              path: '/',
+              builder: (context, state) {
+                _updatePageTitle(
+                    "Mobologics - App Development and Marketing Company");
+                return const WebsiteNavigator(initialIndex: 0);
+              }),
           GoRoute(
             path: '/services',
-            builder: (context, state) =>
-                const WebsiteNavigator(initialIndex: 1),
+            builder: (context, state) {
+              _updatePageTitle("App Development Services - Mobologics");
+              return const WebsiteNavigator(initialIndex: 1);
+            },
           ),
           GoRoute(
             path: '/contact',
-            builder: (context, state) =>
-                const WebsiteNavigator(initialIndex: 2),
+            builder: (context, state) {
+              _updatePageTitle("Contact Mobologics");
+              return const WebsiteNavigator(initialIndex: 2);
+            },
           ),
           GoRoute(
             path: '/app-ads.txt',
@@ -66,5 +73,10 @@ class MyApp extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // Helper function to update the page title
+  void _updatePageTitle(String title) {
+    html.document.title = title;
   }
 }

@@ -140,7 +140,7 @@ Future<void> launchURL(BuildContext context, String url) async {
 
 final List<Map<String, String>> teamMembers = [
   {
-    'name': 'Mudasir Ahmed',
+    'name': 'Mudassar Ahmed',
     'designation': 'CEO',
     'image': 'assets/images/team/mudasir_ahmed.png',
   },
@@ -165,9 +165,24 @@ final List<Map<String, String>> teamMembers = [
     'image': 'assets/images/team/umair_abbasi.png',
   },
   {
+    'name': 'Zarafshan Tariq',
+    'designation': 'Flutter Developer',
+    'image': 'assets/images/team/zarafshan.png',
+  },
+  {
+    'name': 'Remsha Irfan',
+    'designation': 'Flutter Developer',
+    'image': 'assets/images/team/remsha.png',
+  },
+  {
     'name': 'Abdullah Shahzad',
     'designation': 'Flutter Developer',
     'image': 'assets/images/team/abdullah_shahzad.png',
+  },
+  {
+    'name': 'Muhamamd Anas',
+    'designation': 'Flutter Developer',
+    'image': 'assets/images/team/anas.png',
   },
   {
     'name': 'Muhammad Aban',

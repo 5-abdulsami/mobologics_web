@@ -53,7 +53,7 @@ class HighlightContainer extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: mobileView == true ? width * 0.031 : width * 0.015,
+            fontSize: mobileView == true ? width * 0.028 : width * 0.015,
             fontWeight: FontWeight.w600,
             color: isActive ? bgColor : whiteColor,
           ),
